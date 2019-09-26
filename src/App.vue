@@ -49,13 +49,14 @@ export default {
         if(index === i){
           accordion.open = !accordion.open;
           } else {
-
+            accordion.open = false;
           }
+
           return accordion;
-        }
-      )}
+          });
+          }
   }
-}
+  }
 </script>
 
 <style lang="scss">
@@ -83,6 +84,9 @@ body{
   padding:3rem;
   background-color:#ffffff;
   margin:2rem;
+  max-height:30px;
+  overflow-y:hidden;
+  transition: all 0.4s ease-out;
 }
 
 .articleWrapper h2 {
@@ -90,6 +94,7 @@ body{
   clear:both;
   font-weight:700;
   margin-block-end:48px;
+  margin-block-start: 0;
 }
 
 .articleWrapper h2:after{
@@ -98,37 +103,16 @@ body{
   top: 13px;
   right: 0;
   width: 1em;
-  height: 1em;
+  height: 1.25em;
   margin-top: -0.5em;
-  transform: scaleY(-1);
+  transform: scaleY(-1) rotate(180deg);
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2015%22%3E%3Ctitle%3Eicon-expand%3C%2Ftitle%3E%3Cpath%20d%3D%22M21%200l3%203.06L12%2015%200%203.06%203%200l9%209z%22%20fill%3D%22%23d31472%22%20data-name%3D%22Layer%201%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
   content: "";
-  -webkit-transform: scaleY(-1)
-}
-
-.articleWrapper .content {
-  display:flex;
-  flex-direction: row;
-}
-
-@media screen and (max-width:767px){
-  .articleWrapper .content {
-  display:flex;
-  flex-direction: column;
-  }
-}
-
-.articleWrapper .content div:nth-child(1) {
-min-width:80px;
-}
-
-@media screen and (max-width:767px){
-.articleWrapper .content div:nth-child(1) {
-min-height:80px;
-}
+  -webkit-transform: scaleY(-1) rotate(180deg);
+  transition: all 0.4s ease-out;
 }
 
 .articleWrapper img {
@@ -158,20 +142,43 @@ min-height:80px;
   width: 1em;
   height: 1em;
   margin-top: -0.5em;
-  transform: scaleY(-1) rotate(275deg);
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2015%22%3E%3Ctitle%3Eicon-expand%3C%2Ftitle%3E%3Cpath%20d%3D%22M21%200l3%203.06L12%2015%200%203.06%203%200l9%209z%22%20fill%3D%22%23d31472%22%20data-name%3D%22Layer%201%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
   content: "";
+  transform: scaleY(-1) rotate(275deg);
   -webkit-transform: scaleY(-1) rotate(275deg);
 }
 
-.accordion .open {
-background-color:red;
+.articleWrapper .content {
+  display:flex;
+  flex-direction: row;
 }
 
-.accordion {
-background-color:white;
+@media screen and (max-width:767px){
+  .articleWrapper .content {
+  display:flex;
+  flex-direction: column;
+  }
+}
+
+.articleWrapper .content div:nth-child(1) {
+  min-width:80px;
+}
+
+@media screen and (max-width:767px){
+  .articleWrapper .content div:nth-child(1) {
+    min-height:80px;
+    }
+}
+
+.articleWrapper.open {
+  max-height:1000px;
+}
+
+.articleWrapper.open h2:after {
+  transform: scaleY(-1) rotate(360deg);
+  -webkit-transform: scaleY(-1) rotate(360deg);
 }
 </style>
